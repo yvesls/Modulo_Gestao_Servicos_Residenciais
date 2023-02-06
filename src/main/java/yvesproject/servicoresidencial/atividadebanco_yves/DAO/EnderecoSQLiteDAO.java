@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOSQLiteConexao;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IEnderecoSQLiteDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Endereco;
@@ -108,15 +110,15 @@ public class EnderecoSQLiteDAO extends DAOSQLiteConexao implements IEnderecoSQLi
 	}
 
 	@Override
-	public Endereco buscar(Endereco endereco) {
+	public Endereco listarPorId(Endereco endereco) {
 		conectar();
 		// a busca é feita a partir dos idPessoa então o objeto endereço necessita ser instanciado com esse atributo.
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		Endereco end = new Endereco();
 
-		String sql = "SELECT idEndereco, idPessoa, logradouro, cep, numero, bairro, cidade, estado FROM Endereco WHERE id = '"
-				+ endereco.getIdPessoa() + "';";
+		String sql = "SELECT idEndereco, idPessoa, logradouro, cep, numero, bairro, cidade, estado FROM endereco WHERE idEndereco = '"
+				+ endereco.getIdEndereco() + "' AND idPessoa = '" + endereco.getIdPessoa() + "';";
 		stmt = this.criarStatement(sql);
 
 		try {
@@ -142,5 +144,29 @@ public class EnderecoSQLiteDAO extends DAOSQLiteConexao implements IEnderecoSQLi
 		}
 		return end;
 	}
-    
+	
+	public ArrayList<Endereco> listarTodos() {
+		conectar();
+		ArrayList<Endereco> listaEndereco = new ArrayList<>();
+		ResultSet result = null;
+		PreparedStatement stmt = null;
+		Endereco end = new Endereco();
+
+		String sql = "SELECT SELECT idEndereco, idPessoa, logradouro, cep, numero, bairro, cidade, estado FROM endereco;";
+		stmt = this.criarStatement(sql);
+		try {
+			stmt.executeQuery();
+			result = stmt.executeQuery();
+			while (result.next()) {
+				end = new Endereco(String.valueOf(result.getInt("idEndereco")), String.valueOf(result.getInt("idPessoa")), result.getString("logradouro"), result.getInt("cep"),
+						result.getInt("numero"), result.getString("bairro"), result.getString("cidade"), result.getString("estado"));
+				listaEndereco.add(end);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		fechar();
+		return listaEndereco;
+	}
 }

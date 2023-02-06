@@ -5,6 +5,8 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces;
 
+import java.util.ArrayList;
+
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
 
 /**
@@ -14,9 +16,8 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
 public interface IPrestadorSQLiteDAO {
     
     public int salvar(Prestador prestador);
-    
-    public boolean remover();
-    
+    public boolean remover(String id);
     public boolean atualizar(Prestador prestador);
-    
+    public Prestador listarPorId(String id);
+    public ArrayList<Prestador> listarTodos();
 }

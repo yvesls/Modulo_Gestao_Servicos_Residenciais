@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces;
+import java.util.ArrayList;
 
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Cliente;
 
@@ -12,11 +13,10 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Cliente;
  * @author Clínica Eng Software
  */
 public interface IClienteSQLiteDAO {
-	
-    public int salvar(Cliente cliente);
-    
-    public boolean remover(int idCliente);
-    
-    public boolean atualizar(Cliente cliente);
+	public int salvar(Cliente cliente);
+	public boolean remover(String id);
+	public boolean atualizar(Cliente cliente);
+	public Cliente listarPorId(Cliente cliente);
+	public ArrayList<Cliente> listarTodos();
     
 }

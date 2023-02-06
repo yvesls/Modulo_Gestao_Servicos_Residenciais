@@ -5,6 +5,8 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces;
 
+import java.util.ArrayList;
+
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
 
 
@@ -15,11 +17,9 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
 public interface IPessoaSQLiteDAO {
     
     public int salvar(Pessoa pessoa);
-    
-    public boolean remover();
-    
-    public boolean atualizar();
-    
-    public void buscar(int idPessoa);
+    public boolean remover(String pessoa);
+    public boolean atualizar(Pessoa pessoa);
+    public Pessoa listarPorId(String idPessoa);
+    public ArrayList<Pessoa> listarTodos();
     
 }

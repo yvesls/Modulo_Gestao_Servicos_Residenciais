@@ -5,6 +5,8 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces;
 
+import java.util.ArrayList;
+
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Endereco;
 
 /**
@@ -14,11 +16,9 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Endereco;
 public interface IEnderecoSQLiteDAO {
     
     public int salvar(Endereco endereco);
-    
     public boolean remover(Endereco endereco);
-    
     public boolean atualizar(Endereco endereco);
-    
-    public Endereco buscar(Endereco endereco);
+    public Endereco listarPorId(Endereco endereco);
+    public ArrayList<Endereco> listarTodos();
     
 }

@@ -6,7 +6,6 @@
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,6 +13,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -23,7 +23,6 @@ import com.mongodb.connection.Connection;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMongoDBConexao;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMongoDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
-import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
 
 /**
  *
@@ -97,5 +96,28 @@ public class PessoaMongoDBDAO extends DAOMongoDBConexao implements IPessoaMongoD
 			cursor.close();
 		}
 		return list;
+	}
+	
+	public Pessoa listarPorId(String id) {
+		Pessoa pessoa = null;
+		Document doc = null;
+
+		conectar();
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("_id",new ObjectId(id));
+		MongoCollection<Document> coPessoa = mongoClient.getDatabase("mongodb").getCollection("pessoa");
+		MongoCursor<Document> cursor = coPessoa.find(searchQuery).iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+
+				pessoa = new Pessoa((String) doc.get("_id"), (String) doc.get("nome"),
+						(String) doc.get("telefone"));
+			}
+		} finally {
+			cursor.close();
+		}
+		return pessoa;
 	}
 }

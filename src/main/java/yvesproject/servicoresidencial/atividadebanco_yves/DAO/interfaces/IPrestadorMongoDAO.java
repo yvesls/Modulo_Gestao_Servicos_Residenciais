@@ -10,4 +10,5 @@ public interface IPrestadorMongoDAO {
 	public ArrayList<Prestador> listarTodos();
 	public boolean atualizar(Prestador prestador, Pessoa pessoa);
 	public boolean remover(String nome);
+	public Prestador listarPorId(String id);
 }

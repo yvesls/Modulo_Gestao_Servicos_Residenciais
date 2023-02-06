@@ -3,16 +3,16 @@ USE ManutencaoResidencial;
 
 CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Endereco` (
   `idEndereco` INT NOT NULL AUTO_INCREMENT,
-  `idPessoa` INT NOT NULL,
+  `idCliente` INT NOT NULL,
   `Logradouro` VARCHAR(45) NOT NULL,
   `CEP` INT(8) NOT NULL,
   `Numero` INT NOT NULL,
   `Bairro` VARCHAR(45) NOT NULL,
   `Cidade` VARCHAR(45) NOT NULL,
   `Estado` VARCHAR(45) NOT NULL,
-   CONSTRAINT pkEndereco PRIMARY KEY (`idEndereco`, `idPessoa`),
-   CONSTRAINT fkPessoa FOREIGN KEY (`idPessoa`)
-   REFERENCES `ManutencaoResidencial`.`Pessoa`(`idPessoa`)
+   CONSTRAINT pkEndereco PRIMARY KEY (`idEndereco`, `idCliente`),
+   CONSTRAINT fkCliente FOREIGN KEY (`idCliente`)
+   REFERENCES `ManutencaoResidencial`.`Cliente`(`idCliente`)
   );
 
 -- -----------------------------------------------------
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Pessoa` (
 -- -----------------------------------------------------
 -- Table `ManutencaoResidencial`.`Prestador de serviço`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Prestador de servico` (
+CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Prestador` (
   `idPrestador` INT NOT NULL UNIQUE AUTO_INCREMENT,
   `CNPJ` INT(14) NOT NULL,
   CONSTRAINT pkPrestador PRIMARY KEY (`idPrestador`),

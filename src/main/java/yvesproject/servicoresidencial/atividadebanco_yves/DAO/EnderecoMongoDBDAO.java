@@ -13,6 +13,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -113,5 +114,31 @@ public class EnderecoMongoDBDAO extends DAOMongoDBConexao implements IEnderecoMo
 			cursor.close();
 		}
 		return list;
+	}
+	
+	public Endereco listarPorId(String id) {
+		Endereco endereco = null;
+		Document doc = null;
+		Document docInterno = null;
+
+		conectar();
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("_id",new ObjectId(id));
+		MongoCollection<Document> coEndereco = mongoClient.getDatabase("mongodb").getCollection("endereco");
+		MongoCursor<Document> cursor = coEndereco.find(searchQuery).iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				docInterno = (Document) doc.get("pessoa");
+
+				endereco = new Endereco((String) doc.get("_id"),(String) docInterno.get("_id"), (String) doc.get("logradouro"),
+						(int) doc.get("cep"),(int) doc.get("numero"), (String) doc.get("bairro"),(String) doc.get("cidade"),
+						(String) doc.get("estado"));
+			}
+		} finally {
+			cursor.close();
+		}
+		return endereco;
 	}
 }

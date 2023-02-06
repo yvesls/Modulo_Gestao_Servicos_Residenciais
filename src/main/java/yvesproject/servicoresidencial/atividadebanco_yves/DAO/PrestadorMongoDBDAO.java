@@ -22,7 +22,6 @@ import com.mongodb.connection.Connection;
 
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMongoDBConexao;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.model.Cliente;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
 
@@ -132,5 +131,30 @@ public class PrestadorMongoDBDAO extends DAOMongoDBConexao implements IPrestador
 			cursor.close();
 		}
 		return list;
+	}
+	
+	public Prestador listarPorId(String id) {
+		Prestador prestador = null;
+		Document doc = null;
+		Document docInterno = null;
+
+		conectar();
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("_id",new ObjectId(id));
+		MongoCollection<Document> coPrestador = mongoClient.getDatabase("mongodb").getCollection("prestador");
+		MongoCursor<Document> cursor = coPrestador.find(searchQuery).iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				docInterno = (Document) doc.get("pessoa");
+
+				prestador = new Prestador((String) doc.get("_id"), (String) doc.get("cnpj"),
+						(String) docInterno.get("_id"));
+			}
+		} finally {
+			cursor.close();
+		}
+		return prestador;
 	}
 }

@@ -1,8 +1,10 @@
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOSQLiteConexao;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteSQLiteDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Cliente;
@@ -43,6 +45,22 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 	}
 	
 	@Override
+	public boolean remover(String id) {
+		conectar();
+		String sql = "DELETE FROM cliente WHERE idCliente = '" + id + "';";
+		PreparedStatement stmt = this.criarStatement(sql);
+		try {
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		fechar();
+		return true;
+	}
+	
+	@Override
 	public boolean atualizar(Cliente cliente) {
 		conectar();
 		// para atualizar é necessário passar o id, então escolha o construtor que possui esse parâmetro
@@ -67,11 +85,54 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 		return true;	
 	}
 
-	@Override
-	public boolean remover(int idCliente) {
-		// deixar por último pois, como posso excluir um cliente depois de excluir a pessoa da qual ele é? 
-		// deeria excluir a pessoa e o cliente automaticamente.
-		return true;
+
+	public Cliente listarPorId(Cliente cliente) {
+		conectar();
+		// a busca é feita a partir dos idPessoa então o objeto endereço necessita ser instanciado com esse atributo.
+		ResultSet result = null;
+		PreparedStatement stmt = null;
+		Cliente cli = new Cliente();
+
+		String sql = "SELECT idCliente, cpf FROM cliente WHERE idCliente = '"
+				+ cliente.getIdCliente() + ";";
+		stmt = this.criarStatement(sql);
+
+		try {
+			stmt.executeQuery();
+			result = stmt.executeQuery();
+			while (result.next()) {
+				cliente = new Cliente(result.getString("idCliente"), result.getString("cpf"));
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		fechar();
+		return cli;
 	}
-    
+	
+	public ArrayList<Cliente> listarTodos() {
+		conectar();
+		ArrayList<Cliente> listaCliente = new ArrayList<>();
+		ResultSet result = null;
+		PreparedStatement stmt = null;
+		Cliente cliente = new Cliente();
+
+		String sql = "SELECT idCliente, cpf FROM cliente;";
+		stmt = this.criarStatement(sql);
+		try {
+			stmt.executeQuery();
+			result = stmt.executeQuery();
+			while (result.next()) {
+				cliente = new Cliente(result.getString("idCliente"), result.getString("cpf"));
+
+				listaCliente.add(cliente);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		fechar();
+		return listaCliente;
+	}
 }

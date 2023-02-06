@@ -9,4 +9,5 @@ public interface IEnderecoMongoDAO {
 	public boolean remover(String id);
 	public boolean atualizar(Endereco endereco, Pessoa pessoa);
 	public ArrayList<Endereco> listarTodos();
+	public Endereco listarPorId(String id);
 }

@@ -131,4 +131,28 @@ public class ClienteMongoDBDAO extends DAOMongoDBConexao implements IClienteMong
 		}
 		return list;
 	}
+	
+	public Cliente listarPorId(String id) {
+		Cliente cliente = null;
+		Document doc = null;
+		Document docInterno = null;
+
+		conectar();
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("_id", new ObjectId(id));
+		MongoCollection<Document> coCliente = mongoClient.getDatabase("mongodb").getCollection("cliente");
+		MongoCursor<Document> cursor = coCliente.find(searchQuery).iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				docInterno = (Document) doc.get("pessoa");
+
+				cliente = new Cliente((String) doc.get("_id"), (String) doc.get("cpf"), (String) docInterno.get("_id"));
+			}
+		} finally {
+			cursor.close();
+		}
+		return cliente;
+	}
 }

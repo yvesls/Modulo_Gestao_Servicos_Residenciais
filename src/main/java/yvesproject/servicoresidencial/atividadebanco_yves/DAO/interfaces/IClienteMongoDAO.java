@@ -10,4 +10,5 @@ public interface IClienteMongoDAO {
 	public boolean atualizar(Cliente cliente, Pessoa pessoa);
 	public ArrayList<Cliente> listarTodos();
 	public ArrayList<Cliente> listarPorNome(String nome);
+	public Cliente listarPorId(String id);
 }

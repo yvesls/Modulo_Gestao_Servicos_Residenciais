@@ -197,7 +197,7 @@ public class ServicoMongoDBDAO extends DAOMongoDBConexao implements IServicoMong
 		}
 		return list;
 	}
-	
+
 	public ArrayList<Servico> listarPorMesAtual(String mesAnoAtual) {
 		ArrayList<Servico> list = new ArrayList<Servico>();
 		Servico servico = null;
@@ -224,27 +224,60 @@ public class ServicoMongoDBDAO extends DAOMongoDBConexao implements IServicoMong
 				String[] mesAnoServico = getMesAno(dataServico).split(" ");
 				String mesServico = mesAnoServico[0];
 				String anoServico = mesAnoServico[1];
-				if(mesAtual.equals(mesServico) && anoAtual.equals(anoServico)) {
-					servico = new Servico((String) doc.get("_id"), (String) doc.get("descricao"), (double) doc.get("valor"),
-							(String) docInternoCliente.get("_id"), (String) docInternoPrestador.get("_id"),
-							(String) doc.get("data"), (String) docInternoPessoaCliente.get("_id"),
-							(String) docInterPessoaPrestador.get("_id"));
+				if (mesAtual.equals(mesServico) && anoAtual.equals(anoServico)) {
+					servico = new Servico((String) doc.get("_id"), (String) doc.get("descricao"),
+							(double) doc.get("valor"), (String) docInternoCliente.get("_id"),
+							(String) docInternoPrestador.get("_id"), (String) doc.get("data"),
+							(String) docInternoPessoaCliente.get("_id"), (String) docInterPessoaPrestador.get("_id"));
 					list.add(servico);
 				}
 			}
 		} finally {
 			cursor.close();
 		}
-		
+
 		return list;
 	}
-	
+
 	private String getMesAno(String data) {
 		String[] dts;
-    	dts = data.split("/");
-    	String mes = dts[1];
-    	dts = dts[2].split(" ");
-    	String ano = dts[0];
-    	return mes + " " + ano;
+		dts = data.split("/");
+		String mes = dts[1];
+		dts = dts[2].split(" ");
+		String ano = dts[0];
+		return mes + " " + ano;
+	}
+
+	public Servico listarPorId(String id) {
+		Servico servico = null;
+		Document doc = null;
+		Document docInternoCliente = null;
+		Document docInternoPrestador = null;
+		Document docInternoPessoaCliente = null;
+		Document docInterPessoaPrestador = null;
+
+		conectar();
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("_id", new ObjectId(id));
+		MongoCollection<Document> coServico = mongoClient.getDatabase("mongodb").getCollection("servico");
+		MongoCursor<Document> cursor = coServico.find(searchQuery).iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+				docInternoCliente = (Document) doc.get("cliente");
+				docInternoPrestador = (Document) doc.get("prestador");
+				docInternoPessoaCliente = (Document) docInternoCliente.get("pessoa");
+				docInterPessoaPrestador = (Document) docInternoPrestador.get("pessoa");
+				servico = new Servico((String) doc.get("_id"), (String) doc.get("descricao"), (double) doc.get("valor"),
+						(String) docInternoCliente.get("_id"), (String) docInternoPrestador.get("_id"),
+						(String) doc.get("data"), (String) docInternoPessoaCliente.get("_id"),
+						(String) docInterPessoaPrestador.get("_id"));
+			}
+		} finally {
+			cursor.close();
+		}
+
+		return servico;
 	}
 }

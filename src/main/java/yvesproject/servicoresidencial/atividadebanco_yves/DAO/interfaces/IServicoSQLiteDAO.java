@@ -5,6 +5,8 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces;
 
+import java.util.ArrayList;
+
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Servico;
 
 /**
@@ -14,11 +16,9 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Servico;
 public interface IServicoSQLiteDAO {
     
     public int salvar(Servico servico);
-    
-    public boolean remover();
-    
-    public boolean atualizar();
-    
-    public void buscar(int idServico);
-    
+    public boolean remover(String id);
+    public boolean atualizar(Servico Servico);
+    public ArrayList<Servico> listarTodos();
+	public ArrayList<Servico> listarPorBairro(String bairro);
+	public ArrayList<Servico> listarPorMesAtual(String mesAnoAtual);
 }
