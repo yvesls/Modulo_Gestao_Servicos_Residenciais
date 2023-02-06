@@ -10,8 +10,9 @@ package yvesproject.servicoresidencial.atividadebanco_yves.model;
  * @author Clínica Eng Software
  */
 public class Prestador {
-	private Object idPrestador;
+	private String idPrestador;
 	private String cnpj;
+	private String idPessoaMongo;
 	
 	public Prestador() {
     }
@@ -20,16 +21,28 @@ public class Prestador {
 		this.cnpj = cnpj;
 	}
 
-	public Prestador(Object idPrestador, String cnpj) {
+	public Prestador(String idPrestador, String cnpj) {
 		this.idPrestador = idPrestador;
 		this.cnpj = cnpj;
 	}
+	
+	public Prestador(String idPrestador, String cnpj, String idPessoaMongo) {
+		this.idPrestador = idPrestador;
+		this.cnpj = cnpj;
+		this.idPessoaMongo = idPessoaMongo;
+	}
 
-	public Object getIdPrestador() {
+	public String getIdPrestador() {
 		return idPrestador;
 	}
 
 	public String getCnpj() {
 		return cnpj;
 	}
+
+	public String getIdPessoaMongo() {
+		return idPessoaMongo;
+	}
+	
+	
 }

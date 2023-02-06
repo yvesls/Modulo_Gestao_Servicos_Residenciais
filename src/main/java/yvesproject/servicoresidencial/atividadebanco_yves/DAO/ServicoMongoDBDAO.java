@@ -22,7 +22,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Servico;
  */
 public class ServicoMongoDBDAO extends DAOMongoDBConexao implements IServicoMongoDAO {
 
-	public Object salvar(Servico servico, Cliente cliente, Prestador prestador) {
+	public String salvar(Servico servico, Cliente cliente, Prestador prestador) {
 		try {
 			conectar();
 			MongoCollection<Document> coPrestador = mongoClient.getDatabase("mongodb").getCollection("servico");
@@ -36,7 +36,7 @@ public class ServicoMongoDBDAO extends DAOMongoDBConexao implements IServicoMong
 			document.append("prestador", documentPrestador);
 			document.append("data", servico.getData());
 			coPrestador.insertOne(document);
-			return coPrestador.find(document).first().get("_id");
+			return coPrestador.find(document).first().get("_id").toString();
 		} catch (MongoException e) {
 			e.printStackTrace();
 			return null;

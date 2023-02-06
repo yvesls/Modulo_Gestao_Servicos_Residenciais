@@ -10,7 +10,7 @@ package yvesproject.servicoresidencial.atividadebanco_yves.model;
  * @author Clínica Eng Software
  */
 public class Pessoa {
-	private Object idPessoa;
+	private String idPessoa;
     private String nome;
     private String telefone;
     
@@ -22,13 +22,13 @@ public class Pessoa {
     	this.telefone = telefone;
     }
     
-    public Pessoa(Object idPessoa, String nome, String telefone) {
+    public Pessoa(String idPessoa, String nome, String telefone) {
     	this.idPessoa = idPessoa;
     	this.nome = nome;
     	this.telefone = telefone;
     }
 
-	public Object getIdPessoa() {
+	public String getIdPessoa() {
 		return idPessoa;
 	}
 

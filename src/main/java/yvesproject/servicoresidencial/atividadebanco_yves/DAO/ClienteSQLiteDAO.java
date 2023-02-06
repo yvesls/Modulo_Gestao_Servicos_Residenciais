@@ -23,7 +23,7 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 			String sql = "INSERT INTO Cliente (idCliente, cpf) VALUES (?, ?);";
 
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1,(int) cliente.getIdCliente());
+			stmt.setInt(1, Integer.valueOf(cliente.getIdCliente()));
 			stmt.setInt(2, cliente.getCpf());
 			result = stmt.executeUpdate();
 

@@ -29,7 +29,7 @@ public class EnderecoSQLiteDAO extends DAOSQLiteConexao implements IEnderecoSQLi
 			String sql = "INSERT INTO Endereco (idPessoa, logradouro, cep, numero, bairro, cidade, estado) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1,(int) endereco.getIdPessoa());
+			stmt.setInt(1, Integer.valueOf(endereco.getIdPessoa()));
 			stmt.setString(2, endereco.getLogradouro());
 			stmt.setInt(3, endereco.getCep());
 			stmt.setInt(4, endereco.getNumero());
@@ -124,7 +124,7 @@ public class EnderecoSQLiteDAO extends DAOSQLiteConexao implements IEnderecoSQLi
 			result = stmt.executeQuery();
 			System.out.println(result.toString());
 			if(result != null) {
-				end = new Endereco(result.getInt("idEndereco"), result.getInt("idPessoa"), result.getString("logradouro"), result.getInt("cep"),
+				end = new Endereco(String.valueOf(result.getInt("idEndereco")), String.valueOf(result.getInt("idPessoa")), result.getString("logradouro"), result.getInt("cep"),
 					result.getInt("numero"), result.getString("bairro"), result.getString("cidade"), result.getString("estado"));
 			}
 			fechar();

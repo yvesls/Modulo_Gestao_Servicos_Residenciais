@@ -21,7 +21,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
  */
 public class EnderecoMongoDBDAO extends DAOMongoDBConexao implements IEnderecoMongoDAO {
 
-	public Object salvar(Endereco endereco, Pessoa pessoa) {
+	public String salvar(Endereco endereco, Pessoa pessoa) {
 		try {
 			conectar();
 			MongoCollection<Document> coEndereco = mongoClient.getDatabase("mongodb").getCollection("endereco");
@@ -36,7 +36,7 @@ public class EnderecoMongoDBDAO extends DAOMongoDBConexao implements IEnderecoMo
 			document.append("cidade", endereco.getCidade());
 			document.append("estado", endereco.getEstado());
 			coEndereco.insertOne(document);
-			return coEndereco.find(document).first().get("_id");
+			return coEndereco.find(document).first().get("_id").toString();
 		} catch (MongoException e) {
 			e.printStackTrace();
 			return null;

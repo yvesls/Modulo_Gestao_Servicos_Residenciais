@@ -10,7 +10,7 @@ package yvesproject.servicoresidencial.atividadebanco_yves.model;
  * @author Clínica Eng Software
  */
 public class Cliente {
-	private Object idCliente;
+	private String idCliente;
     private int cpf;
     
     public Cliente() {
@@ -20,12 +20,12 @@ public class Cliente {
     	this.cpf = cpf;
     }
     
-    public Cliente(Object idCliente, int cpf) {
+    public Cliente(String idCliente, int cpf) {
     	this.idCliente = idCliente;
     	this.cpf = cpf;
     }
 
-	public Object getIdCliente() {
+	public String getIdCliente() {
 		return idCliente;
 	}
 

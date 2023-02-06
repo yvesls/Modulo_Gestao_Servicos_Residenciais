@@ -31,8 +31,8 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, servico.getDescricao());
 			stmt.setDouble(2, servico.getValor());
-			stmt.setInt(3,(int) servico.getIdCliente());
-			stmt.setInt(4,(int) servico.getIdPrestador());
+			stmt.setInt(3, Integer.valueOf(servico.getIdCliente()) );
+			stmt.setInt(4, Integer.valueOf(servico.getIdPrestador()));
 			stmt.setDate(5, servico.getData());
 			result = stmt.executeUpdate();
 

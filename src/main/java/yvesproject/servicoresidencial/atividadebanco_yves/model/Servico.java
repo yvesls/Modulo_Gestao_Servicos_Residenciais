@@ -12,17 +12,17 @@ import java.sql.Date;
  * @author Clínica Eng Software
  */
 public class Servico {
-	private Object idServico;
+	private String idServico;
 	private String descricao;
 	private double valor;
-	private Object idCliente;
-	private Object idPrestador;
+	private String idCliente;
+	private String idPrestador;
 	private Date data;
 
 	public Servico() {
 	}
 	
-	public Servico(String descricao, double valor, Object idCliente, Object idPrestador) {
+	public Servico(String descricao, double valor, String idCliente, String idPrestador) {
 		this.descricao = descricao;
 		this.valor = valor;
 		this.idCliente = idCliente;
@@ -31,7 +31,7 @@ public class Servico {
 		this.data = new Date(millis);
 	}
 
-	public Servico(Object idServico, String descricao, double valor, Object idCliente, Object idPrestador) {
+	public Servico(String idServico, String descricao, double valor, String idCliente, String idPrestador) {
 		this.idServico = idServico;
 		this.descricao = descricao;
 		this.valor = valor;
@@ -41,7 +41,7 @@ public class Servico {
 		this.data = new Date(millis);
 	}
 
-	public Object getIdServico() {
+	public String getIdServico() {
 		return idServico;
 	}
 
@@ -53,11 +53,11 @@ public class Servico {
 		return valor;
 	}
 
-	public Object getIdCliente() {
+	public String getIdCliente() {
 		return idCliente;
 	}
 
-	public Object getIdPrestador() {
+	public String getIdPrestador() {
 		return idPrestador;
 	}
 

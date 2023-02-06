@@ -10,8 +10,8 @@ package yvesproject.servicoresidencial.atividadebanco_yves.model;
  * @author Clínica Eng Software
  */
 public class Endereco{
-	private Object idEndereco;
-	private Object idPessoa;
+	private String idEndereco;
+	private String idPessoa;
     private String logradouro;
     private int cep;
     private int numero;
@@ -22,7 +22,7 @@ public class Endereco{
     public Endereco() {
     }
     
-    public Endereco(Object idPessoa, String logradouro, int cep, int numero, String bairro, String cidade, String estado) {
+    public Endereco(String idPessoa, String logradouro, int cep, int numero, String bairro, String cidade, String estado) {
     	this.idPessoa = idPessoa;
     	this.logradouro = logradouro;
     	this.cep = cep;
@@ -32,7 +32,7 @@ public class Endereco{
     	this.estado = estado;
     }
     
-    public Endereco(Object idEndereco, Object idPessoa, String logradouro, int cep, int numero, String bairro, String cidade, String estado) {
+    public Endereco(String idEndereco, String idPessoa, String logradouro, int cep, int numero, String bairro, String cidade, String estado) {
     	this.idEndereco = idEndereco;
     	this.idPessoa = idPessoa;
     	this.logradouro = logradouro;
@@ -43,11 +43,11 @@ public class Endereco{
     	this.estado = estado;
     }
 
-	public Object getIdEndereco() {
+	public String getIdEndereco() {
 		return idEndereco;
 	}
 
-	public Object getIdPessoa() {
+	public String getIdPessoa() {
 		return idPessoa;
 	}
 

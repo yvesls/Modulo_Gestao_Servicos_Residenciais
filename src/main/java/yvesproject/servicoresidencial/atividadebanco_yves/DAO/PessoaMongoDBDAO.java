@@ -5,10 +5,13 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO;
 
+import java.util.Iterator;
+
 import org.bson.Document;
 
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
+
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMongoDBConexao;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMongoDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
@@ -19,14 +22,15 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
  */
 public class PessoaMongoDBDAO extends DAOMongoDBConexao implements IPessoaMongoDAO {
 
-	public Object salvar(Pessoa pessoa) {
+	public String salvar(Pessoa pessoa) {
 		try {
 			conectar();
 			MongoCollection<Document> coPessoa = mongoClient.getDatabase("mongodb").getCollection("pessoa");
 			Document document = new Document("nome", pessoa.getNome());
 			document.append("telefone", pessoa.getTelefone());
 			coPessoa.insertOne(document);
-			return coPessoa.find(document).first().get("_id");
+			
+			return (String) coPessoa.find(document).first().get("_id");
 		} catch (MongoException e) {
 			e.printStackTrace();
 			return null;

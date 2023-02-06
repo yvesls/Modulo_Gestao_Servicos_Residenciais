@@ -29,7 +29,7 @@ public class PrestadorSQLiteDAO extends DAOSQLiteConexao implements IPrestadorSQ
 			String sql = "INSERT INTO Prestador (idPrestador, cnpj) VALUES (?, ?);";
 
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1,(int) prestador.getIdPrestador());
+			stmt.setInt(1, Integer.valueOf(prestador.getIdPrestador()));
 			stmt.setString(2, prestador.getCnpj());
 			result = stmt.executeUpdate();
 

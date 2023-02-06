@@ -5,9 +5,13 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.MongoSocketOpenException;
+import com.mongodb.MongoException;
+import com.mongodb.connection.Connection;
 
 /**
  *
@@ -23,8 +27,8 @@ public class DAOMongoDBConexao {
 			mClient = new MongoClientURI(url);
 			mongoClient = new MongoClient(mClient);
 			
-		} catch (MongoSocketOpenException e) {
-			e.printStackTrace();
+		} catch (MongoException e) {
+			Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 }

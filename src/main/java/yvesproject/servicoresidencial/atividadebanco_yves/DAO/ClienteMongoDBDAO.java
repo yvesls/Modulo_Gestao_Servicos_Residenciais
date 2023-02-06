@@ -21,7 +21,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
  */
 public class ClienteMongoDBDAO extends DAOMongoDBConexao implements IClienteMongoDAO {
 
-    public Object salvar(Cliente cliente, Pessoa pessoa) {
+    public String salvar(Cliente cliente, Pessoa pessoa) {
     	try {
 			conectar();
 			MongoCollection<Document> coCliente = mongoClient.getDatabase("mongodb").getCollection("cliente");
@@ -31,7 +31,7 @@ public class ClienteMongoDBDAO extends DAOMongoDBConexao implements IClienteMong
 			Document document = new Document("cpf", cliente.getCpf());
 			document.append("pessoa", documentPessoa);
 			coCliente.insertOne(document);
-			return coCliente.find(document).first().get("_id");
+			return coCliente.find(document).first().get("_id").toString();
 		} catch (MongoException e) {
 			e.printStackTrace();
 			return null;
