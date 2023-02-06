@@ -7,7 +7,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
 
 public interface IPrestadorMongoDAO {
 	public String salvar(Prestador prestador, Pessoa pessoa);
-	public ArrayList<Prestador> listar();
+	public ArrayList<Prestador> listarTodos();
 	public boolean atualizar(Prestador prestador, Pessoa pessoa);
 	public boolean remover(String nome);
 }

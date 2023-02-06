@@ -11,25 +11,36 @@ package yvesproject.servicoresidencial.atividadebanco_yves.model;
  */
 public class Cliente {
 	private String idCliente;
-    private int cpf;
+    private String cpf;
+    private String idPessoaMongo;
     
     public Cliente() {
     }
     
-    public Cliente(int cpf) {
+    public Cliente(String cpf) {
     	this.cpf = cpf;
     }
     
-    public Cliente(String idCliente, int cpf) {
+    public Cliente(String idCliente, String cpf) {
     	this.idCliente = idCliente;
     	this.cpf = cpf;
+    }
+    
+    public Cliente(String idCliente, String cpf, String idPessoaMongo) {
+    	this.idCliente = idCliente;
+    	this.cpf = cpf;
+    	this.idPessoaMongo = idPessoaMongo;
     }
 
 	public String getIdCliente() {
 		return idCliente;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
+	}
+
+	public String getIdPessoaMongo() {
+		return idPessoaMongo;
 	}
 }

@@ -33,7 +33,7 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 			stmt.setDouble(2, servico.getValor());
 			stmt.setInt(3, Integer.valueOf(servico.getIdCliente()) );
 			stmt.setInt(4, Integer.valueOf(servico.getIdPrestador()));
-			stmt.setDate(5, servico.getData());
+			stmt.setString(5, servico.getData());
 			result = stmt.executeUpdate();
 
 		} catch (SQLException e) {

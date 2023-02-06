@@ -5,7 +5,9 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -17,7 +19,9 @@ public class Servico {
 	private double valor;
 	private String idCliente;
 	private String idPrestador;
-	private Date data;
+	private String data;
+	private String idPessoaCliente;
+	private String idPessoaPrestador;
 
 	public Servico() {
 	}
@@ -27,8 +31,11 @@ public class Servico {
 		this.valor = valor;
 		this.idCliente = idCliente;
 		this.idPrestador = idPrestador;
-		long millis = System.currentTimeMillis();
-		this.data = new Date(millis);
+		LocalDateTime data = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String dataFormatada = data.format(formato);
+		this.data = dataFormatada;
 	}
 
 	public Servico(String idServico, String descricao, double valor, String idCliente, String idPrestador) {
@@ -37,8 +44,33 @@ public class Servico {
 		this.valor = valor;
 		this.idCliente = idCliente;
 		this.idPrestador = idPrestador;
-		long millis = System.currentTimeMillis();
-		this.data = new Date(millis);
+		LocalDateTime data = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String dataFormatada = data.format(formato);
+		this.data = dataFormatada;
+	}
+	
+	public Servico(String idServico, String descricao, double valor, String idCliente, String idPrestador, String data) {
+		this.idServico = idServico;
+		this.descricao = descricao;
+		this.valor = valor;
+		this.idCliente = idCliente;
+		this.idPrestador = idPrestador;
+		this.data = data;
+	}
+	
+	public Servico(String idServico, String descricao, double valor, String idCliente, String idPrestador, String data,
+			String idPessoaCliente, String idPessoaPrestador) {
+		super();
+		this.idServico = idServico;
+		this.descricao = descricao;
+		this.valor = valor;
+		this.idCliente = idCliente;
+		this.idPrestador = idPrestador;
+		this.data = data;
+		this.idPessoaCliente = idPessoaCliente;
+		this.idPessoaPrestador = idPessoaPrestador;
 	}
 
 	public String getIdServico() {
@@ -61,7 +93,7 @@ public class Servico {
 		return idPrestador;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 }

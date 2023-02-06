@@ -24,7 +24,7 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, Integer.valueOf(cliente.getIdCliente()));
-			stmt.setInt(2, cliente.getCpf());
+			stmt.setString(2, cliente.getCpf());
 			result = stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -49,7 +49,7 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 		String sql = "UPDATE Cliente SET cpf=? WHERE idCliente = '" + cliente.getIdCliente() + "';";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
-			stmt.setInt(1, cliente.getCpf());
+			stmt.setString(1, cliente.getCpf());
 			stmt.executeUpdate();
 			fechar();
 		} catch (SQLException e) {

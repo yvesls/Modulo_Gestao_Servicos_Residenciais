@@ -5,16 +5,25 @@
  */
 package yvesproject.servicoresidencial.atividadebanco_yves.DAO;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
+import com.mongodb.connection.Connection;
 
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMongoDBConexao;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMongoDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
+import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
 
 /**
  *
@@ -29,27 +38,64 @@ public class PessoaMongoDBDAO extends DAOMongoDBConexao implements IPessoaMongoD
 			Document document = new Document("nome", pessoa.getNome());
 			document.append("telefone", pessoa.getTelefone());
 			coPessoa.insertOne(document);
-			
+
 			return (String) coPessoa.find(document).first().get("_id");
 		} catch (MongoException e) {
-			e.printStackTrace();
+			Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
 	}
 
-	public boolean remover() {
-		
-		return false;
+	public boolean remover(String id) {
+		conectar();
+		try {
+			MongoCollection<Document> coPessoa = mongoClient.getDatabase("mongodb").getCollection("pessoa");
+			coPessoa.deleteOne(Filters.eq("_id", new ObjectId(id)));
+			return true;
+		} catch (MongoException e) {
+			Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, e);
+			return false;
+		}
 	}
 
-	public boolean atualizar() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean atualizar(Pessoa pessoa) {
+		conectar();
+		try {
+			MongoCollection<Document> coPessoa = mongoClient.getDatabase("mongodb").getCollection("pessoa");
+
+			Document filter = new Document("_id", new ObjectId(pessoa.getIdPessoa()));
+			Document documentPessoa = new Document();
+			documentPessoa.append("nome", pessoa.getNome());
+			documentPessoa.append("telefone", pessoa.getTelefone());
+			Bson update = new Document("$set", documentPessoa);
+			coPessoa.updateMany(filter, update);
+			return true;
+		} catch (MongoException e) {
+			Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, e);
+			return false;
+		}
 	}
 
-	public void buscar(int idPessoa) {
-		// TODO Auto-generated method stub
+	public ArrayList<Pessoa> listarTodos() {
+		ArrayList<Pessoa> list = new ArrayList<Pessoa>();
+		Pessoa pessoa = null;
+		Document doc = null;
 
+		conectar();
+		MongoCollection<Document> coPessoa = mongoClient.getDatabase("mongodb").getCollection("pessoa");
+		MongoCursor<Document> cursor = coPessoa.find().iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				doc = cursor.next();
+
+				pessoa = new Pessoa((String) doc.get("_id"), (String) doc.get("nome"),
+						(String) doc.get("telefone"));
+				list.add(pessoa);
+			}
+		} finally {
+			cursor.close();
+		}
+		return list;
 	}
-
 }
