@@ -13,7 +13,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Endereco;
  *
  * @author Clínica Eng Software
  */
-public interface IEnderecoSQLiteDAO {
+public interface IEnderecoMySQLDAO {
     
     public int salvar(Endereco endereco);
     public boolean remover(Endereco endereco);

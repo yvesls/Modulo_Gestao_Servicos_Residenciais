@@ -14,12 +14,13 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
  *
  * @author Clínica Eng Software
  */
-public interface IPessoaSQLiteDAO {
+public interface IPessoaMySQLDAO {
     
     public int salvar(Pessoa pessoa);
     public boolean remover(String pessoa);
     public boolean atualizar(Pessoa pessoa);
     public Pessoa listarPorId(String idPessoa);
     public ArrayList<Pessoa> listarTodos();
+    public ArrayList<Pessoa> listarPorNome(String nome);
     
 }

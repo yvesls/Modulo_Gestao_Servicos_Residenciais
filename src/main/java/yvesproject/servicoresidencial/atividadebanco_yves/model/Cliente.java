@@ -43,4 +43,9 @@ public class Cliente {
 	public String getIdPessoaMongo() {
 		return idPessoaMongo;
 	}
+
+	@Override
+	public String toString() {
+		return "Cliente [idCliente=" + idCliente + ", cpf=" + cpf + ", idPessoaMongo=" + idPessoaMongo + "]";
+	}
 }

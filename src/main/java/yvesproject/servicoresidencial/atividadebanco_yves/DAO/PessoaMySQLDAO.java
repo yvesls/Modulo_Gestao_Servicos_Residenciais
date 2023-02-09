@@ -11,20 +11,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOSQLiteConexao;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMySQLConexao;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Pessoa;
 
 /**
  *
  * @author Clínica Eng Software
  */
-public class PessoaSQLiteDAO extends DAOSQLiteConexao implements IPessoaSQLiteDAO {
+public class PessoaMySQLDAO extends DAOMySQLConexao implements IPessoaMySQLDAO {
 
 	@Override
 	public int salvar(Pessoa pessoa) {
 		PreparedStatement stmt = null;
-		int result = -1;
+		int idGerado = -1;
+		ResultSet result = null;
 		try {
 			conectar();
 
@@ -33,8 +34,11 @@ public class PessoaSQLiteDAO extends DAOSQLiteConexao implements IPessoaSQLiteDA
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, pessoa.getNome());
 			stmt.setString(2, "2765054329");
-			result = stmt.executeUpdate();
-
+			stmt.executeUpdate();
+			result = stmt.getGeneratedKeys();
+			if (result.next()) {
+				idGerado = result.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -47,13 +51,13 @@ public class PessoaSQLiteDAO extends DAOSQLiteConexao implements IPessoaSQLiteDA
 			}
 		}
 		fechar();
-		return result;
+		return idGerado;
 	}
 
 	@Override
 	public boolean remover(String id) {
 		conectar();
-		String sql = "DELETE FROM pessoa WHERE idPessoa = '" + id + "';";
+		String sql = "DELETE FROM pessoa WHERE idPessoa = " + Integer.valueOf(id) + ";";
 		PreparedStatement stmt = this.criarStatement(sql);
 		try {
 			stmt.executeUpdate();
@@ -70,7 +74,7 @@ public class PessoaSQLiteDAO extends DAOSQLiteConexao implements IPessoaSQLiteDA
 	public boolean atualizar(Pessoa pessoa) {
 		conectar();
 		// para atualizar é necessário passar o id, então escolha o construtor que possui esse parâmetro
-		String sql = "UPDATE pessoa SET nome=?, telefone=? WHERE idPessoa = '" + pessoa.getIdPessoa() + "';";
+		String sql = "UPDATE pessoa SET nome=?, telefone=? WHERE idPessoa = " +  Integer.valueOf(pessoa.getIdPessoa()) + ";";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
 			stmt.setString(1, pessoa.getNome());
@@ -99,8 +103,7 @@ public class PessoaSQLiteDAO extends DAOSQLiteConexao implements IPessoaSQLiteDA
 		PreparedStatement stmt = null;
 		Pessoa pessoa = new Pessoa();
 
-		String sql = "SELECT idPessoa, nome, telefone FROM pessoa WHERE"
-				+ " nome LIKE '%" + nome + "S';";
+		String sql = "SELECT idPessoa, nome, telefone FROM pessoa WHERE nome LIKE '%" + nome + "%';";
 		stmt = this.criarStatement(sql);
 		try {
 			stmt.executeQuery();
@@ -120,13 +123,13 @@ public class PessoaSQLiteDAO extends DAOSQLiteConexao implements IPessoaSQLiteDA
 	}
 
 	@Override
-	public Pessoa listarPorId(String idPessoa) {
+	public Pessoa listarPorId(String id) {
 		conectar();
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		Pessoa pessoa = new Pessoa();
 
-		String sql = "SELECT idPessoa, nome, telefone FROM pessoa WHERE idPessoa = '" + idPessoa + "';";
+		String sql = "SELECT idPessoa, nome, telefone FROM pessoa WHERE idPessoa = " +  Integer.valueOf(id) + ";";
 		stmt = this.criarStatement(sql);
 		try {
 			stmt.executeQuery();

@@ -10,20 +10,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOSQLiteConexao;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMySQLConexao;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Servico;
 
 /**
  *
  * @author Clínica Eng Software
  */
-public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLiteDAO {
+public class ServicoMySQLDAO extends DAOMySQLConexao implements IServicoMySQLDAO {
 
 	@Override
 	public int salvar(Servico servico) {
 		PreparedStatement stmt = null;
-		int result = -1;
+		int idGerado = -1;
+		ResultSet result = null;
 		try {
 			conectar();
 
@@ -35,10 +36,14 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 			stmt.setInt(3, Integer.valueOf(servico.getIdCliente()) );
 			stmt.setInt(4, Integer.valueOf(servico.getIdPrestador()));
 			stmt.setString(5, servico.getData());
-			result = stmt.executeUpdate();
-
+			stmt.executeUpdate();
+			result = stmt.getGeneratedKeys();
+			if (result.next()) {
+				idGerado = result.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} finally {
 			if (stmt != null) {
 				try {
@@ -49,13 +54,13 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 			}
 		}
 		fechar();
-		return result;
+		return idGerado;
 	}
 
 	@Override
 	public boolean remover(String id) {
 		conectar();
-		String sql = "DELETE FROM servico WHERE idServico = '" + id + "';";
+		String sql = "DELETE FROM servico WHERE idServico = " + Integer.valueOf(id) + ";";
 		PreparedStatement stmt = this.criarStatement(sql);
 		try {
 			stmt.executeUpdate();
@@ -73,7 +78,7 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 		conectar();
 		// para atualizar é necessário passar o id, então escolha o construtor que
 		// possui esse parâmetro
-		String sql = "UPDATE servico SET descricao=?, valor=?, data=? WHERE idServico = '" + servico.getIdServico() + "';";
+		String sql = "UPDATE servico SET descricao=?, valor=?, data=? WHERE idServico = " + Integer.valueOf(servico.getIdServico()) + ";";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
 			stmt.setString(1, servico.getDescricao());
@@ -97,19 +102,17 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 	}
 	
 
-	public Servico listarPorId(Servico servico) {
+	public Servico listarPorId(String id) {
 		conectar();
 		// a busca é feita a partir dos idPessoa então o objeto endereço necessita ser instanciado com esse atributo.
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		Servico ser = new Servico();
 
-		String sql = "SELECT idServico, descricao, valor, idCliente, idPrestador FROM servico WHERE idServico = '"
-				+ servico.getIdServico() + ";";
+		String sql = "SELECT idServico, descricao, valor, idCliente, idPrestador, data FROM servico WHERE idServico = " + id + ";";
 		stmt = this.criarStatement(sql);
 
 		try {
-			stmt.executeQuery();
 			result = stmt.executeQuery();
 			while (result.next()) {
 				ser = new Servico(result.getString("idServico"), result.getString("descricao"), result.getDouble("valor"),
@@ -156,10 +159,7 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 		PreparedStatement stmt = null;
 		Servico ser = new Servico();
 
-		String sql = "SELECT servico.idServico, servico.descricao, servico.valor, servico.idCliente, servico.idPrestador, servico.data FROM servico"
-				+ "INNER JOIN cliente ON servico.idServico = cliente.idCliente"
-				+ "INNER JOIN endereco ON cliente.idCLiente = endereco.idPessoa"
-				+ "WHERE endereco.bairro = '" + bairro + "';";
+		String sql = "SELECT servico.idServico, servico.descricao, servico.valor, servico.idCliente, servico.idPrestador, servico.data FROM servico INNER JOIN cliente ON servico.idCliente = cliente.idCliente INNER JOIN endereco ON cliente.idCLiente = endereco.idCliente WHERE endereco.bairro = '" + bairro + "';";
 		stmt = this.criarStatement(sql);
 		try {
 			stmt.executeQuery();
@@ -186,8 +186,7 @@ public class ServicoSQLiteDAO extends DAOSQLiteConexao implements IServicoSQLite
 		Servico ser = new Servico();
 		String data = getMesAno(mesAnoAtual);
 
-		String sql = "SELECT idServico, descricao, valor, idCliente, idPrestador, data FROM servico"
-				+ "WHERE data LIKE '%" + data + "%';";
+		String sql = "SELECT idServico, descricao, valor, idCliente, idPrestador, data FROM servico WHERE data LIKE '%" + data + "%';";
 		stmt = this.criarStatement(sql);
 		try {
 			stmt.executeQuery();

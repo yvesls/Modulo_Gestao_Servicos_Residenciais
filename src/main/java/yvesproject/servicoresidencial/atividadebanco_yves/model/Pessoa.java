@@ -39,4 +39,9 @@ public class Pessoa {
 	public String getTelefone() {
 		return telefone;
 	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [idPessoa=" + idPessoa + ", nome=" + nome + ", telefone=" + telefone + "]";
+	}
 }

@@ -43,6 +43,9 @@ public class Prestador {
 	public String getIdPessoaMongo() {
 		return idPessoaMongo;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Prestador [idPrestador=" + idPrestador + ", cnpj=" + cnpj + ", idPessoaMongo=" + idPessoaMongo + "]";
+	}
 }

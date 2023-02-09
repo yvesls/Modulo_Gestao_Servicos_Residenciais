@@ -13,7 +13,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Servico;
  *
  * @author Clínica Eng Software
  */
-public interface IServicoSQLiteDAO {
+public interface IServicoMySQLDAO {
     
     public int salvar(Servico servico);
     public boolean remover(String id);
@@ -21,4 +21,5 @@ public interface IServicoSQLiteDAO {
     public ArrayList<Servico> listarTodos();
 	public ArrayList<Servico> listarPorBairro(String bairro);
 	public ArrayList<Servico> listarPorMesAtual(String mesAnoAtual);
+	public Servico listarPorId(String id);
 }

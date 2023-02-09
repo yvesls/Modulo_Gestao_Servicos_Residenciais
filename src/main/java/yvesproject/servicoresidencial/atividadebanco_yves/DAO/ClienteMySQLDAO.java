@@ -5,15 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOSQLiteConexao;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMySQLConexao;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Cliente;
 
 /**
  *
  * @author Clínica Eng Software
  */
-public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLiteDAO {
+public class ClienteMySQLDAO extends DAOMySQLConexao implements IClienteMySQLDAO {
 
 	@Override
 	public int salvar(Cliente cliente) {
@@ -28,7 +28,9 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 			stmt.setInt(1, Integer.valueOf(cliente.getIdCliente()));
 			stmt.setString(2, cliente.getCpf());
 			result = stmt.executeUpdate();
-
+			if(result == 1) {
+				result = Integer.valueOf(cliente.getIdCliente());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -47,7 +49,7 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 	@Override
 	public boolean remover(String id) {
 		conectar();
-		String sql = "DELETE FROM cliente WHERE idCliente = '" + id + "';";
+		String sql = "DELETE FROM cliente WHERE idCliente = " + id + ";";
 		PreparedStatement stmt = this.criarStatement(sql);
 		try {
 			stmt.executeUpdate();
@@ -86,22 +88,21 @@ public class ClienteSQLiteDAO extends DAOSQLiteConexao implements IClienteSQLite
 	}
 
 
-	public Cliente listarPorId(Cliente cliente) {
+	public Cliente listarPorId(String id) {
 		conectar();
 		// a busca é feita a partir dos idPessoa então o objeto endereço necessita ser instanciado com esse atributo.
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		Cliente cli = new Cliente();
 
-		String sql = "SELECT idCliente, cpf FROM cliente WHERE idCliente = '"
-				+ cliente.getIdCliente() + ";";
+		String sql = "SELECT idCliente, cpf FROM cliente WHERE idCliente = " + id + ";";
 		stmt = this.criarStatement(sql);
 
 		try {
 			stmt.executeQuery();
 			result = stmt.executeQuery();
 			while (result.next()) {
-				cliente = new Cliente(result.getString("idCliente"), result.getString("cpf"));
+				cli = new Cliente(result.getString("idCliente"), result.getString("cpf"));
 			}
 			stmt.close();
 		} catch (SQLException e) {

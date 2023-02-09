@@ -7,45 +7,45 @@ package yvesproject.servicoresidencial.atividadebanco_yves.DAO;
 
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.DAOAbstractFactory;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IEnderecoMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IEnderecoSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IEnderecoMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoMySQLDAO;
 
 /**
  *
  * @author Clínica Eng Software
  */
-public class DAOSQLiteFactory implements DAOAbstractFactory {
+public class DAOMySQLFactory implements DAOAbstractFactory {
 
     @Override
-    public IEnderecoSQLiteDAO getEnderecoSQLiteDAO() {
-        return new EnderecoSQLiteDAO(); 
+    public IEnderecoMySQLDAO getEnderecoSQLiteDAO() {
+        return new EnderecoMySQLDAO(); 
     }
 
     @Override
-    public IPessoaSQLiteDAO getPessoaSQLiteDAO() {
-        return new PessoaSQLiteDAO(); 
+    public IPessoaMySQLDAO getPessoaSQLiteDAO() {
+        return new PessoaMySQLDAO(); 
     }
 
     @Override
-    public IServicoSQLiteDAO getServicoSQLiteDAO() {
-        return new ServicoSQLiteDAO(); 
+    public IServicoMySQLDAO getServicoSQLiteDAO() {
+        return new ServicoMySQLDAO(); 
     }
 
     @Override
-    public IClienteSQLiteDAO getClienteSQLiteDAO() {
-        return new ClienteSQLiteDAO(); 
+    public IClienteMySQLDAO getClienteSQLiteDAO() {
+        return new ClienteMySQLDAO(); 
     }
 
     @Override
-    public IPrestadorSQLiteDAO getPrestadorSQLiteDAO() {
-         return new PrestadorSQLiteDAO(); 
+    public IPrestadorMySQLDAO getPrestadorSQLiteDAO() {
+         return new PrestadorMySQLDAO(); 
     }
 
 	@Override

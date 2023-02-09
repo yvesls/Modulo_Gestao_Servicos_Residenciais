@@ -11,15 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOSQLiteConexao;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.conexao.DAOMySQLConexao;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
 
 /**
  *
  * @author Clínica Eng Software
  */
-public class PrestadorSQLiteDAO extends DAOSQLiteConexao implements IPrestadorSQLiteDAO {
+public class PrestadorMySQLDAO extends DAOMySQLConexao implements IPrestadorMySQLDAO {
 
 	@Override
 	public int salvar(Prestador prestador) {
@@ -28,13 +28,15 @@ public class PrestadorSQLiteDAO extends DAOSQLiteConexao implements IPrestadorSQ
 		try {
 			conectar();
 
-			String sql = "INSERT INTO prestador de servico (idPrestador, cnpj) VALUES (?, ?);";
+			String sql = "INSERT INTO prestador (idPrestador, cnpj) VALUES (?, ?);";
 
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, Integer.valueOf(prestador.getIdPrestador()));
 			stmt.setString(2, prestador.getCnpj());
 			result = stmt.executeUpdate();
-
+			if(result == 1) {
+				result = Integer.valueOf(prestador.getIdPrestador());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -53,17 +55,16 @@ public class PrestadorSQLiteDAO extends DAOSQLiteConexao implements IPrestadorSQ
 	@Override
 	public boolean remover(String id) {
 		conectar();
-		String sql = "DELETE FROM prestador de servico WHERE idPrestador = '" + id + "';";
+		String sql = "DELETE FROM prestador WHERE idPrestador = " + Integer.valueOf(id) + ";";
 		PreparedStatement stmt = this.criarStatement(sql);
 		try {
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		}
 		fechar();
-		return true;													// Tools | Templates.
+		return true;												
 	}
 
 	@Override
@@ -71,7 +72,7 @@ public class PrestadorSQLiteDAO extends DAOSQLiteConexao implements IPrestadorSQ
 		conectar();
 		// para atualizar é necessário passar o id, então escolha o construtor que
 		// possui esse parâmetro
-		String sql = "UPDATE prestador de servico SET cnpj=? WHERE idPrestador = '" + prestador.getIdPrestador() + "';";
+		String sql = "UPDATE prestador SET cnpj=? WHERE idPrestador = '" + prestador.getIdPrestador() + "';";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
 			stmt.setString(1, prestador.getCnpj());
@@ -100,8 +101,7 @@ public class PrestadorSQLiteDAO extends DAOSQLiteConexao implements IPrestadorSQ
 		PreparedStatement stmt = null;
 		Prestador pres = new Prestador();
 
-		String sql = "SELECT idPrestador, cnpj FROM prestador de servico WHERE idPrestador = '"
-				+ id + ";";
+		String sql = "SELECT idPrestador, cnpj FROM prestador WHERE idPrestador = " + Integer.valueOf(id) + ";";
 		stmt = this.criarStatement(sql);
 
 		try {
@@ -131,7 +131,7 @@ public class PrestadorSQLiteDAO extends DAOSQLiteConexao implements IPrestadorSQ
 			stmt.executeQuery();
 			result = stmt.executeQuery();
 			while (result.next()) {
-				pres = new Prestador(result.getString("idCliente"), result.getString("cnpj"));
+				pres = new Prestador(result.getString("idPrestador"), result.getString("cnpj"));
 
 				listaPrestador.add(pres);
 			}

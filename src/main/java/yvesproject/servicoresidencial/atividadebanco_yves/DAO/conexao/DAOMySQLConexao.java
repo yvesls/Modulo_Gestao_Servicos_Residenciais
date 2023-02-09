@@ -15,7 +15,7 @@ import java.sql.Statement;
  *
  * @author Clínica Eng Software
  */
-public abstract class DAOSQLiteConexao {
+public abstract class DAOMySQLConexao {
     protected Connection conexao;
 	protected boolean conectar() {
 		
@@ -23,6 +23,7 @@ public abstract class DAOSQLiteConexao {
 		try {
 			//Class.forName("com.mysql.jdbc.Driver");
 			setConexao(DriverManager.getConnection(url, "root", "root"));
+			System.out.println(conexao);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

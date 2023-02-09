@@ -96,4 +96,11 @@ public class Servico {
 	public String getData() {
 		return data;
 	}
+
+	@Override
+	public String toString() {
+		return "Servico [idServico=" + idServico + ", descricao=" + descricao + ", valor=" + valor + ", idCliente="
+				+ idCliente + ", idPrestador=" + idPrestador + ", data=" + data + ", idPessoaCliente=" + idPessoaCliente
+				+ ", idPessoaPrestador=" + idPessoaPrestador + "]";
+	}
 }

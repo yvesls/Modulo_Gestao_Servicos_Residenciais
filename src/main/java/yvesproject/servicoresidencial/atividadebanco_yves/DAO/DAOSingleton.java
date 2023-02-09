@@ -2,24 +2,24 @@ package yvesproject.servicoresidencial.atividadebanco_yves.DAO;
 
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.DAOAbstractFactory;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IClienteMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IEnderecoMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IEnderecoSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IEnderecoMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPessoaMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IPrestadorMySQLDAO;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoMongoDAO;
-import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoSQLiteDAO;
+import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServicoMySQLDAO;
 
 public class DAOSingleton {
 	private static DAOSingleton singleton;
 	private DAOAbstractFactory daoAbstractFactory;
-	private IClienteSQLiteDAO clienteSqliteDAO;
-	private IEnderecoSQLiteDAO enderecoSqliteDAO;
-	private IPessoaSQLiteDAO pessoaSqliteDAO;
-	private IPrestadorSQLiteDAO prestadorSqliteDAO;
-	private IServicoSQLiteDAO servicoSqliteDAO;
+	private IClienteMySQLDAO clienteSqliteDAO;
+	private IEnderecoMySQLDAO enderecoSqliteDAO;
+	private IPessoaMySQLDAO pessoaSqliteDAO;
+	private IPrestadorMySQLDAO prestadorSqliteDAO;
+	private IServicoMySQLDAO servicoSqliteDAO;
 	private IClienteMongoDAO clienteMongoDAO;
 	private IEnderecoMongoDAO enderecoMongoDAO;
 	private IPessoaMongoDAO pessoaMongoDAO;
@@ -53,23 +53,23 @@ public class DAOSingleton {
 		return singleton;
 	}
 
-	public IClienteSQLiteDAO getClienteSqliteDAO() {
+	public IClienteMySQLDAO getClienteSqliteDAO() {
 		return clienteSqliteDAO;
 	}
 
-	public IEnderecoSQLiteDAO getEnderecoSqliteDAO() {
+	public IEnderecoMySQLDAO getEnderecoSqliteDAO() {
 		return enderecoSqliteDAO;
 	}
 
-	public IPessoaSQLiteDAO getPessoaSqliteDAO() {
+	public IPessoaMySQLDAO getPessoaSqliteDAO() {
 		return pessoaSqliteDAO;
 	}
 
-	public IPrestadorSQLiteDAO getPrestadorSqliteDAO() {
+	public IPrestadorMySQLDAO getPrestadorSqliteDAO() {
 		return prestadorSqliteDAO;
 	}
 
-	public IServicoSQLiteDAO getServicoSqliteDAO() {
+	public IServicoMySQLDAO getServicoSqliteDAO() {
 		return servicoSqliteDAO;
 	}
 
