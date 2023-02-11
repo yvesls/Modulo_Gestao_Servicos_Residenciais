@@ -24,27 +24,27 @@ import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServic
 public class DAOMySQLFactory implements DAOAbstractFactory {
 
     @Override
-    public IEnderecoMySQLDAO getEnderecoSQLiteDAO() {
+    public IEnderecoMySQLDAO getEnderecoMySQLDAO() {
         return new EnderecoMySQLDAO(); 
     }
 
     @Override
-    public IPessoaMySQLDAO getPessoaSQLiteDAO() {
+    public IPessoaMySQLDAO getPessoaMySQLDAO() {
         return new PessoaMySQLDAO(); 
     }
 
     @Override
-    public IServicoMySQLDAO getServicoSQLiteDAO() {
+    public IServicoMySQLDAO getServicoMySQLDAO() {
         return new ServicoMySQLDAO(); 
     }
 
     @Override
-    public IClienteMySQLDAO getClienteSQLiteDAO() {
+    public IClienteMySQLDAO getClienteMySQLDAO() {
         return new ClienteMySQLDAO(); 
     }
 
     @Override
-    public IPrestadorMySQLDAO getPrestadorSQLiteDAO() {
+    public IPrestadorMySQLDAO getPrestadorMySQLDAO() {
          return new PrestadorMySQLDAO(); 
     }
 

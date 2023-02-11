@@ -1,7 +1,5 @@
 package yvesproject.servicoresidencial.atividadebanco_yves;
 
-import java.util.ArrayList;
-
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.DAOMySQLFactory;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.DAOSingleton;
 import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.DAOAbstractFactory;
@@ -13,6 +11,8 @@ public class App {
 
 		DAOAbstractFactory factory = new DAOMySQLFactory();
 		DAOSingleton.configurarSingleton(factory);
+		
+		//testando mongo
 		// String result = factory.getPrestadorMongoDAO().salvar(new
 		// Prestador("12309349302"), new Pessoa("63e05e3422dffe182cf87d71" ,"Jeremilson
 		// Martins", "29392019203"));
@@ -95,7 +95,7 @@ public class App {
 		//int idNovo = DAOSingleton.getInstance().getClienteMySQLDAO().salvar(new Cliente("33", "15182334443"));
 		//DAOSingleton.getInstance().getClienteMySQLDAO().remover("33");
 		//DAOSingleton.getInstance().getClienteMySQLDAO().atualizar(new Cliente("31", "15182399443"));
-		//Cliente serv = DAOSingleton.getInstance().getClienteMySQLDAO().listarPorId("30");
+		//Cliente serv = DAOSingleton.getInstance().getClienteMySQLDAO().listarPorId("25");
 		//ArrayList<Cliente> servs = DAOSingleton.getInstance().getClienteMySQLDAO().listarTodos();
 		
 		//for(Cliente serv : servs) { System.out.println(serv.toString());}

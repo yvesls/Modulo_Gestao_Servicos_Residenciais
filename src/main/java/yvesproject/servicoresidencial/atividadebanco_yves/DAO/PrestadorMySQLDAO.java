@@ -20,7 +20,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Prestador;
  * @author Clínica Eng Software
  */
 public class PrestadorMySQLDAO extends DAOMySQLConexao implements IPrestadorMySQLDAO {
-
+	
 	@Override
 	public int salvar(Prestador prestador) {
 		PreparedStatement stmt = null;

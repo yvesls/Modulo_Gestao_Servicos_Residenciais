@@ -20,7 +20,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Endereco;
  * @author Clínica Eng Software
  */
 public class EnderecoMySQLDAO extends DAOMySQLConexao implements IEnderecoMySQLDAO {
-
+	
 	@Override
 	public int salvar(Endereco endereco) {
 		PreparedStatement stmt = null;
@@ -60,9 +60,9 @@ public class EnderecoMySQLDAO extends DAOMySQLConexao implements IEnderecoMySQLD
 	}
 
 	@Override
-	public boolean remover(Endereco endereco) {
+	public boolean remover(String id) {
 		conectar();
-		String sql = "DELETE FROM Endereco WHERE idEndereco = " + Integer.valueOf(endereco.getIdEndereco()) + " AND idCliente = " + Integer.valueOf(endereco.getIdPessoa()) + ";";
+		String sql = "DELETE FROM Endereco WHERE idCliente = " + Integer.valueOf(id) + ";";
 		PreparedStatement stmt = this.criarStatement(sql);
 		try {
 			stmt.executeUpdate();
@@ -112,14 +112,14 @@ public class EnderecoMySQLDAO extends DAOMySQLConexao implements IEnderecoMySQLD
 	}
 
 	@Override
-	public Endereco listarPorId(Endereco endereco) {
+	public Endereco listarPorId(String id) {
 		conectar();
 		// a busca é feita a partir dos idPessoa então o objeto endereço necessita ser instanciado com esse atributo.
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		Endereco end = new Endereco();
 
-		String sql = "SELECT idEndereco, idCliente, logradouro, cep, numero, bairro, cidade, estado FROM endereco WHERE idEndereco = " + Integer.valueOf(endereco.getIdEndereco()) + " AND idCliente = " + Integer.valueOf(endereco.getIdPessoa()) + ";";
+		String sql = "SELECT idEndereco, idCliente, logradouro, cep, numero, bairro, cidade, estado FROM endereco WHERE  idCliente = " + Integer.valueOf(id) + ";";
 		stmt = this.criarStatement(sql);
 		try {
 			result = stmt.executeQuery();

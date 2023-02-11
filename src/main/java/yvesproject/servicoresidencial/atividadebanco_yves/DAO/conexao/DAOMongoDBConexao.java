@@ -13,6 +13,8 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 import com.mongodb.connection.Connection;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 /**
  *
  * @author Clínica Eng Software
@@ -22,8 +24,12 @@ public class DAOMongoDBConexao {
 	protected MongoClient mongoClient;
 
 	protected void conectar() {
+		Dotenv dotenv = Dotenv.load();
+        String url = dotenv.get("CAMINHO_BANCO_DADOS_MONGODB");
+        if(url == null){
+            url = ("CAMINHO_BANCO_DADOS_MONGODB");
+        }
     	try {
-			String url = "mongodb://localhost:27017";
 			mClient = new MongoClientURI(url);
 			mongoClient = new MongoClient(mClient);
 			

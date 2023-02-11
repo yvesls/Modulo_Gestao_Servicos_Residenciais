@@ -48,27 +48,27 @@ public class DAOMongoDBFactory implements DAOAbstractFactory {
     }
 
 	@Override
-	public IEnderecoMySQLDAO getEnderecoSQLiteDAO() {
+	public IEnderecoMySQLDAO getEnderecoMySQLDAO() {
 		return null;
 	}
 
 	@Override
-	public IPessoaMySQLDAO getPessoaSQLiteDAO() {
+	public IPessoaMySQLDAO getPessoaMySQLDAO() {
 		return null;
 	}
 
 	@Override
-	public IServicoMySQLDAO getServicoSQLiteDAO() {
+	public IServicoMySQLDAO getServicoMySQLDAO() {
 		return null;
 	}
 
 	@Override
-	public IClienteMySQLDAO getClienteSQLiteDAO() {
+	public IClienteMySQLDAO getClienteMySQLDAO() {
 		return null;
 	}
 
 	@Override
-	public IPrestadorMySQLDAO getPrestadorSQLiteDAO() {
+	public IPrestadorMySQLDAO getPrestadorMySQLDAO() {
 		return null;
 	}
 }

@@ -16,9 +16,9 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Endereco;
 public interface IEnderecoMySQLDAO {
     
     public int salvar(Endereco endereco);
-    public boolean remover(Endereco endereco);
+    public boolean remover(String id);
     public boolean atualizar(Endereco endereco);
-    public Endereco listarPorId(Endereco endereco);
+    public Endereco listarPorId(String id);
     public ArrayList<Endereco> listarTodos();
     
 }

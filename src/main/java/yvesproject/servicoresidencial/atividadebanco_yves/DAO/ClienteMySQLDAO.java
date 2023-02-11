@@ -28,7 +28,7 @@ public class ClienteMySQLDAO extends DAOMySQLConexao implements IClienteMySQLDAO
 			stmt.setInt(1, Integer.valueOf(cliente.getIdCliente()));
 			stmt.setString(2, cliente.getCpf());
 			result = stmt.executeUpdate();
-			if(result == 1) {
+			if (result == 1) {
 				result = Integer.valueOf(cliente.getIdCliente());
 			}
 		} catch (SQLException e) {
@@ -45,7 +45,7 @@ public class ClienteMySQLDAO extends DAOMySQLConexao implements IClienteMySQLDAO
 		fechar();
 		return result;
 	}
-	
+
 	@Override
 	public boolean remover(String id) {
 		conectar();
@@ -55,17 +55,18 @@ public class ClienteMySQLDAO extends DAOMySQLConexao implements IClienteMySQLDAO
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		fechar();
 		return true;
 	}
-	
+
 	@Override
 	public boolean atualizar(Cliente cliente) {
 		conectar();
-		// para atualizar é necessário passar o id, então escolha o construtor que possui esse parâmetro
+		// para atualizar é necessário passar o id, então escolha o construtor que
+		// possui esse parâmetro
 		String sql = "UPDATE Cliente SET cpf=? WHERE idCliente = '" + cliente.getIdCliente() + "';";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
@@ -84,13 +85,13 @@ public class ClienteMySQLDAO extends DAOMySQLConexao implements IClienteMySQLDAO
 				}
 			}
 		}
-		return true;	
+		return true;
 	}
-
 
 	public Cliente listarPorId(String id) {
 		conectar();
-		// a busca é feita a partir dos idPessoa então o objeto endereço necessita ser instanciado com esse atributo.
+		// a busca é feita a partir dos idPessoa então o objeto endereço necessita ser
+		// instanciado com esse atributo.
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		Cliente cli = new Cliente();
@@ -111,7 +112,7 @@ public class ClienteMySQLDAO extends DAOMySQLConexao implements IClienteMySQLDAO
 		fechar();
 		return cli;
 	}
-	
+
 	public ArrayList<Cliente> listarTodos() {
 		conectar();
 		ArrayList<Cliente> listaCliente = new ArrayList<>();

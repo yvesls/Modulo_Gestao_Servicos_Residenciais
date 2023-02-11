@@ -15,11 +15,11 @@ import yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces.IServic
 public class DAOSingleton {
 	private static DAOSingleton singleton;
 	private DAOAbstractFactory daoAbstractFactory;
-	private IClienteMySQLDAO clienteSqliteDAO;
-	private IEnderecoMySQLDAO enderecoSqliteDAO;
-	private IPessoaMySQLDAO pessoaSqliteDAO;
-	private IPrestadorMySQLDAO prestadorSqliteDAO;
-	private IServicoMySQLDAO servicoSqliteDAO;
+	private IClienteMySQLDAO clienteMySQLDAO;
+	private IEnderecoMySQLDAO enderecoMySQLDAO;
+	private IPessoaMySQLDAO pessoaMySQLDAO;
+	private IPrestadorMySQLDAO prestadorMySQLDAO;
+	private IServicoMySQLDAO servicoMySQLDAO;
 	private IClienteMongoDAO clienteMongoDAO;
 	private IEnderecoMongoDAO enderecoMongoDAO;
 	private IPessoaMongoDAO pessoaMongoDAO;
@@ -30,11 +30,11 @@ public class DAOSingleton {
 	}
 
 	private void configurar(DAOAbstractFactory daoAbstractFactory) {
-		this.clienteSqliteDAO = daoAbstractFactory.getClienteSQLiteDAO();
-		this.enderecoSqliteDAO = daoAbstractFactory.getEnderecoSQLiteDAO();
-		this.pessoaSqliteDAO = daoAbstractFactory.getPessoaSQLiteDAO();
-		this.prestadorSqliteDAO = daoAbstractFactory.getPrestadorSQLiteDAO();
-		this.servicoSqliteDAO = daoAbstractFactory.getServicoSQLiteDAO();
+		this.clienteMySQLDAO = daoAbstractFactory.getClienteMySQLDAO();
+		this.enderecoMySQLDAO = daoAbstractFactory.getEnderecoMySQLDAO();
+		this.pessoaMySQLDAO = daoAbstractFactory.getPessoaMySQLDAO();
+		this.prestadorMySQLDAO = daoAbstractFactory.getPrestadorMySQLDAO();
+		this.servicoMySQLDAO = daoAbstractFactory.getServicoMySQLDAO();
 		this.clienteMongoDAO = daoAbstractFactory.getClienteMongoDAO();
 		this.enderecoMongoDAO = daoAbstractFactory.getEnderecoMongoDAO();
 		this.pessoaMongoDAO = daoAbstractFactory.getPessoaMongoDAO();
@@ -53,24 +53,24 @@ public class DAOSingleton {
 		return singleton;
 	}
 
-	public IClienteMySQLDAO getClienteSqliteDAO() {
-		return clienteSqliteDAO;
+	public IClienteMySQLDAO getClienteMySQLDAO() {
+		return clienteMySQLDAO;
 	}
 
-	public IEnderecoMySQLDAO getEnderecoSqliteDAO() {
-		return enderecoSqliteDAO;
+	public IEnderecoMySQLDAO getEnderecoMySQLDAO() {
+		return enderecoMySQLDAO;
 	}
 
-	public IPessoaMySQLDAO getPessoaSqliteDAO() {
-		return pessoaSqliteDAO;
+	public IPessoaMySQLDAO getPessoaMySQLDAO() {
+		return pessoaMySQLDAO;
 	}
 
-	public IPrestadorMySQLDAO getPrestadorSqliteDAO() {
-		return prestadorSqliteDAO;
+	public IPrestadorMySQLDAO getPrestadorMySQLDAO() {
+		return prestadorMySQLDAO;
 	}
 
-	public IServicoMySQLDAO getServicoSqliteDAO() {
-		return servicoSqliteDAO;
+	public IServicoMySQLDAO getServicoMySQLDAO() {
+		return servicoMySQLDAO;
 	}
 
 	public IClienteMongoDAO getClienteMongoDAO() {

@@ -12,15 +12,15 @@ package yvesproject.servicoresidencial.atividadebanco_yves.DAO.interfaces;
  */
 public interface DAOAbstractFactory {
 
-	public IEnderecoMySQLDAO getEnderecoSQLiteDAO();
+	public IEnderecoMySQLDAO getEnderecoMySQLDAO();
 
-	public IPessoaMySQLDAO getPessoaSQLiteDAO();
+	public IPessoaMySQLDAO getPessoaMySQLDAO();
 
-	public IServicoMySQLDAO getServicoSQLiteDAO();
+	public IServicoMySQLDAO getServicoMySQLDAO();
 
-	public IClienteMySQLDAO getClienteSQLiteDAO();
+	public IClienteMySQLDAO getClienteMySQLDAO();
 
-	public IPrestadorMySQLDAO getPrestadorSQLiteDAO();
+	public IPrestadorMySQLDAO getPrestadorMySQLDAO();
 
 	public IEnderecoMongoDAO getEnderecoMongoDAO();
 

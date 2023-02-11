@@ -19,7 +19,7 @@ import yvesproject.servicoresidencial.atividadebanco_yves.model.Servico;
  * @author Clínica Eng Software
  */
 public class ServicoMySQLDAO extends DAOMySQLConexao implements IServicoMySQLDAO {
-
+	
 	@Override
 	public int salvar(Servico servico) {
 		PreparedStatement stmt = null;
