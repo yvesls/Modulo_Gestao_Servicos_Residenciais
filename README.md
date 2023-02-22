@@ -20,7 +20,7 @@ Módulo responsável por realizar a conexão com o(s) banco de dados por meio de
 
 Exemplo de inserção em MySQL
 
-<p><img width="100%" height="100%" src="img/inclusao_slq.png"></img></p>
+<p><img width="100%" height="100%" src="img/inclusao_sql.png"></img></p>
 
 Exemplo de inserção em MongoDB
 
