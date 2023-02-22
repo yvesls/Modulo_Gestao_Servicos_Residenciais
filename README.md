@@ -20,16 +20,16 @@ Módulo responsável por realizar a conexão com o(s) banco de dados por meio de
 
 <h3 align="center">Exemplo de inserção em MySQL</h3>
 
-<p align="center"><img width="100%" style="padding: 0 10%;" src="img/inclusao_sql.png"></img></p>
+<p align="center"><img width="80%" style="padding: 0 10%;" src="img/inclusao_sql.png"></img></p>
 <br>
 <h3 align="center">Exemplo de inserção em MongoDB</h3>
 
-<p align="center"><img width="100%" style="padding: 0 10%;" src="img/inclusao_nosql.png"></img></p> 
+<p align="center"><img width="80%" style="padding: 0 10%;" src="img/inclusao_nosql.png"></img></p> 
 <br>
 <h3 align="center">DML do banco de dados relacional</h3>
 
-<p align="center"><img width="100%" style="padding: 0 10%;" src="img/ddl1.png"></img></p> 
-<p align="center"><img width="100%" style="padding: 0 10%;" src="img/ddl2.png"></img></p> 
+<p align="center"><img width="80%" style="padding: 0 10%;" src="img/ddl1.png"></img></p> 
+<p align="center"><img width="80%" style="padding: 0 10%;" src="img/ddl2.png"></img></p> 
 <br>
 <br> 
 
