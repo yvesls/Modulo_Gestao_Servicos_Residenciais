@@ -20,17 +20,17 @@ Módulo responsável por realizar a conexão com o(s) banco de dados por meio de
 
 Exemplo de inserção em MySQL
 
-<p><img width="100%" height="100%" src="img/inclusao_sql.png"></img></p>
+<p><img width="100%" style="padding: 0 10%;" src="img/inclusao_sql.png"></img></p>
 
 Exemplo de inserção em MongoDB
 
-<p><img width="100%" height="100%" src="img/inclusao_nosql.png"></img></p> 
+<p><img width="100%" style="padding: 0 10%;" src="img/inclusao_nosql.png"></img></p> 
 
 DML do banco de dados relacional
 
-<p><img width="100%" height="100%" src="img/ddl1.png"></img></p> 
+<p><img width="100%" style="padding: 0 10%;" src="img/ddl1.png"></img></p> 
 
-<p><img width="100%" height="100%" src="img/ddl2.png"></img></p> 
+<p><img width="100%" style="padding: 0 10%;" src="img/ddl2.png"></img></p> 
 
 <br> 
 
@@ -41,7 +41,7 @@ REQUISITOS:
 - MySQL WorkBanch 8.0 instalado
 - MongoDB Server 4.0 Instalado
 
-PASSOS ANTES DE EXECUTAR O PROJETO:
+PASSOS ANTES DE EXECUTAR O PROJETO: <br>
 1- Configure o banco de dados mysql e mongodb no .env <br>
 2- Execute o script DDL e DML (caso queira popular o banco) para criar o banco necessário. <br>
 3- Realize o update project no maven do projeto. <br>
