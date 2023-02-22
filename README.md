@@ -46,7 +46,7 @@ PASSOS ANTES DE EXECUTAR O PROJETO: <br>
 1- Configure o banco de dados mysql e mongodb no .env <br>
 2- Execute o script DDL e DML (caso queira popular o banco) para criar o banco necessário. <br>
 3- Realize o update project no maven do projeto. <br>
-4- Insira linhas de consulta/modificação no App.java do projeto de acordo com os exemplos de lá.
+4- Insira linhas de consulta/modificação no App.java do projeto de acordo com os exemplos que estão no mesmo.
 
 <br> 
 
