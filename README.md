@@ -16,21 +16,23 @@
 
 Módulo responsável por realizar a conexão com o(s) banco de dados por meio de uma DAO e abstract factory para realizar serviços de inclusão, exclusão visualização e atualização de dados relacionados à um sistema de controle de serviços residenciais. O trabalho foi proposto na matéria "banco de dados" e seu objetivo era aplicar na prática os conceitos de banco de dados relacionais e, como extra, adaptar o DDL criado para funcionar em um banco de dados não relacional. 
 
+<br> 
+
 # 📸 Layouts 
 
 <h3 align="center">Exemplo de inserção em MySQL</h3>
 
-<p align="center"><img width="80%" style="padding: 0 10%;" src="img/inclusao_sql.png"></img></p>
+<p align="center"><img width="80%" src="img/inclusao_sql.png"></img></p>
 <br>
 <h3 align="center">Exemplo de inserção em MongoDB</h3>
 
-<p align="center"><img width="80%" style="padding: 0 10%;" src="img/inclusao_nosql.png"></img></p> 
+<p align="center"><img width="80%" src="img/inclusao_nosql.png"></img></p> 
 <br>
 <h3 align="center">DML do banco de dados relacional</h3>
 
-<p align="center"><img width="80%" style="padding: 0 10%;" src="img/ddl1.png"></img></p> 
-<p align="center"><img width="80%" style="padding: 0 10%;" src="img/ddl2.png"></img></p> 
-<br>
+<p align="center"><img width="80%" src="img/ddl1.png"></img></p> 
+<p align="center"><img width="80%" src="img/ddl2.png"></img></p> 
+
 <br> 
 
 # 📝 Requisitos e recomendações
@@ -45,6 +47,8 @@ PASSOS ANTES DE EXECUTAR O PROJETO: <br>
 2- Execute o script DDL e DML (caso queira popular o banco) para criar o banco necessário. <br>
 3- Realize o update project no maven do projeto. <br>
 4- Insira linhas de consulta/modificação no App.java do projeto de acordo com os exemplos de lá.
+
+<br> 
 
 # ✒️ Autor
 
