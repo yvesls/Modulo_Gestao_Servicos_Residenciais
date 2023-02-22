@@ -14,21 +14,23 @@
 
 # 💻 Sobre o projeto 
 
-Módulo responsável por realizar a conexão com o(s) banco de dados por meio de uma DAO e abstract factory para realizar serviços de inclusão, exclusão visualização e atualização de dados relacionados à um sistema de controle de serviços residenciais. O trabalho foi proposto na matéria "banco de dados" e seu objetivo era aplicar na prática os conceitos de banco de dados relacionais e, como extra, adaptar o DML criado para funcionar em um banco de dados não relacional. 
+Módulo responsável por realizar a conexão com o(s) banco de dados por meio de uma DAO e abstract factory para realizar serviços de inclusão, exclusão visualização e atualização de dados relacionados à um sistema de controle de serviços residenciais. O trabalho foi proposto na matéria "banco de dados" e seu objetivo era aplicar na prática os conceitos de banco de dados relacionais e, como extra, adaptar o DDL criado para funcionar em um banco de dados não relacional. 
 
 # 📸 Layouts 
 
 Exemplo de inserção em MySQL
 
-<p><img width="100%" height="100%" src="img/login.png"></img></p>
+<p><img width="100%" height="100%" src="img/inclusao_slq.png"></img></p>
 
 Exemplo de inserção em MongoDB
 
-<p><img width="100%" height="100%" src="img/principal_admin.png"></img></p> 
+<p><img width="100%" height="100%" src="img/inclusao_nosql.png"></img></p> 
 
 DML do banco de dados relacional
 
-<p><img width="100%" height="100%" src="img/notificacoes_admin.png"></img></p> 
+<p><img width="100%" height="100%" src="img/ddl1.png"></img></p> 
+
+<p><img width="100%" height="100%" src="img/ddl2.png"></img></p> 
 
 <br> 
 

@@ -2,22 +2,12 @@ DROP DATABASE ManutencaoResidencial;
 CREATE DATABASE IF NOT EXISTS ManutencaoResidencial;
 USE ManutencaoResidencial;
 
-
-
--- -----------------------------------------------------
--- Table `ManutencaoResidencial`.`Pessoa`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Pessoa` (
   `idPessoa` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NOT NULL,
   `Telefone` VARCHAR(45)  NOT NULL,
   CONSTRAINT pkPessoa PRIMARY KEY (`idPessoa`)
 );
-
-
--- -----------------------------------------------------
--- Table `ManutencaoResidencial`.`Prestador de serviço`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`prestador` (
   `idPrestador` INT NOT NULL,
   `CNPJ` VARCHAR(18) NOT NULL,
@@ -26,11 +16,6 @@ CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`prestador` (
     FOREIGN KEY (`idPrestador`)
     REFERENCES `ManutencaoResidencial`.`Pessoa` (`idPessoa`)
 );
-
-
--- -----------------------------------------------------
--- Table `ManutencaoResidencial`.`Cliente`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Cliente` (
   `idCliente` INT NOT NULL,
   `CPF` VARCHAR(11) NOT NULL,
@@ -39,11 +24,6 @@ CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Cliente` (
     FOREIGN KEY (`idCliente`)
     REFERENCES `ManutencaoResidencial`.`Pessoa` (`idPessoa`)
 );
-
-
--- -----------------------------------------------------
--- Table `ManutencaoResidencial`.`Servico`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ManutencaoResidencial`.`Servico` (
   `idServico` INT NOT NULL AUTO_INCREMENT,
   `Descricao` VARCHAR(45) NOT NULL,
